@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Beta Tester Agreement — Call Box Helper</title>
+  <meta name="description" content="Beta Tester Agreement and Non-Disclosure Agreement for Call Box Helper." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #ffffff;
+      --off-white: #f7f6f3;
+      --light-grey: #efefed;
+      --mid-grey: #c8c7c2;
+      --dark-grey: #5a5955;
+      --near-black: #1c1c1a;
+      --accent: #2a6496;
+      --accent-light: #e8f0f7;
+      --accent-dark: #1a3d5c;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --radius: 4px;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--near-black);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--light-grey);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      color: var(--near-black);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--dark-grey);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--near-black); }
+
+    .page-header {
+      background: var(--near-black);
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+    }
+    .page-header .label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7ec8f0;
+      margin-bottom: 1rem;
+    }
+    .page-header h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .page-header .meta {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+
+    .toc {
+      background: var(--off-white);
+      border: 1px solid var(--light-grey);
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 3rem;
+    }
+    .toc h3 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.875rem;
+    }
+    .toc ol {
+      list-style: decimal;
+      padding-left: 1.25rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.3rem 2rem;
+    }
+    .toc li a {
+      font-size: 0.875rem;
+      color: var(--dark-grey);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .toc li a:hover { color: var(--accent); }
+
+    .policy-section {
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--light-grey);
+    }
+    .policy-section:last-child { border-bottom: none; }
+
+    .section-number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .policy-section h2 {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+      color: var(--near-black);
+    }
+    .policy-section p {
+      font-size: 0.9rem;
+      color: var(--dark-grey);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+    .policy-section p:last-child { margin-bottom: 0; }
+    .policy-section ol, .policy-section ul {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .policy-section li {
+      font-size: 0.9rem;
+      color: var(--dark-grey);
+      line-height: 1.75;
+      margin-bottom: 0.35rem;
+      font-weight: 300;
+    }
+    .policy-section strong {
+      color: var(--near-black);
+      font-weight: 600;
+    }
+
+    .highlight-box {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+    }
+    .highlight-box p {
+      color: var(--accent-dark) !important;
+      font-weight: 400 !important;
+      margin-bottom: 0 !important;
+    }
+
+    footer {
+      background: var(--near-black);
+      color: rgba(255,255,255,0.4);
+      padding: 3rem 2rem;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
+    }
+    .footer-logo span { color: #7ec8f0; }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+    .footer-copy { font-size: 0.75rem; }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 1rem; }
+      .toc ol { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Call Box <span>Helper</span></a>
+    <a href="index.html" class="nav-back">← Back to Home</a>
+  </nav>
+
+  <div class="page-header">
+    <div class="label">Legal</div>
+    <h1>Beta Tester Agreement & NDA</h1>
+    <p class="meta">Effective upon acceptance &nbsp;·&nbsp; Last updated: May 2026</p>
+  </div>
+
+  <div class="content">
+
+    <div class="highlight-box">
+      <p><strong>How acceptance works:</strong> By checking the agreement checkbox on the Beta Signup form, you confirm that you have read, understood, and agree to be bound by all terms of this Agreement. The form submission timestamp serves as your dated record of acceptance.</p>
+    </div>
+
+    <br>
+
+    <div class="toc">
+      <h3>Contents</h3>
+      <ol>
+        <li><a href="#s1">Confidentiality</a></li>
+        <li><a href="#s2">No Reverse Engineering</a></li>
+        <li><a href="#s3">No Competition</a></li>
+        <li><a href="#s4">Feedback Ownership</a></li>
+        <li><a href="#s5">No Distribution</a></li>
+        <li><a href="#s6">No Warranty</a></li>
+        <li><a href="#s7">Term and Termination</a></li>
+        <li><a href="#s8">Governing Law</a></li>
+        <li><a href="#s9">Entire Agreement</a></li>
+      </ol>
+    </div>
+
+    <div class="policy-section" id="s1">
+      <div class="section-number">Section 01</div>
+      <h2>Confidentiality</h2>
+      <p>Tester acknowledges that the Call Box Helper application, including its features, functionality, design, code, and any related materials provided during the beta program (collectively, <strong>"Confidential Information"</strong>), are proprietary and confidential to Developer.</p>
+      <p>Tester agrees to:</p>
+      <ol>
+        <li>Keep all Confidential Information strictly confidential and not disclose it to any third party without prior written consent from Developer.</li>
+        <li>Not post, publish, stream, screenshot, or otherwise share information about the application on any public platform, social media, forum, or review site during the beta period.</li>
+        <li>Use the Confidential Information solely for the purpose of testing and providing feedback to Developer.</li>
+      </ol>
+    </div>
+
+    <div class="policy-section" id="s2">
+      <div class="section-number">Section 02</div>
+      <h2>No Reverse Engineering</h2>
+      <p>Tester agrees not to:</p>
+      <ol>
+        <li>Decompile, disassemble, reverse engineer, or otherwise attempt to derive the source code of the application.</li>
+        <li>Modify, adapt, translate, or create derivative works based on the application.</li>
+        <li>Remove, alter, or obscure any proprietary notices, labels, or marks on the application.</li>
+      </ol>
+    </div>
+
+    <div class="policy-section" id="s3">
+      <div class="section-number">Section 03</div>
+      <h2>No Competition</h2>
+      <p>During the beta period and for a period of <strong>one (1) year</strong> following its conclusion, Tester agrees not to use knowledge, ideas, or insights gained through participation in the beta program to develop, assist in developing, or contribute to any application or product that competes directly with Call Box Helper.</p>
+    </div>
+
+    <div class="policy-section" id="s4">
+      <div class="section-number">Section 04</div>
+      <h2>Feedback Ownership</h2>
+      <p>Any feedback, suggestions, bug reports, ideas, or recommendations that Tester provides to Developer regarding the application (<strong>"Feedback"</strong>) shall become the sole and exclusive property of Developer. Tester assigns all rights, title, and interest in such Feedback to Developer and waives any claim to compensation or credit for such Feedback.</p>
+    </div>
+
+    <div class="policy-section" id="s5">
+      <div class="section-number">Section 05</div>
+      <h2>No Distribution</h2>
+      <p>Tester agrees not to:</p>
+      <ol>
+        <li>Share, transfer, sell, or sublicense access to the application or beta program to any third party.</li>
+        <li>Share installation files, APKs, or any build of the application with any person not authorized by Developer.</li>
+      </ol>
+    </div>
+
+    <div class="policy-section" id="s6">
+      <div class="section-number">Section 06</div>
+      <h2>No Warranty</h2>
+      <p>Tester acknowledges that the application is provided in beta form <strong>"as is"</strong> and may contain bugs, errors, or defects. Developer makes no warranties, express or implied, regarding the application's performance, reliability, or fitness for any particular purpose during the beta period.</p>
+    </div>
+
+    <div class="policy-section" id="s7">
+      <div class="section-number">Section 07</div>
+      <h2>Term and Termination</h2>
+      <p>This Agreement is effective upon Tester's acceptance and remains in effect until Developer formally concludes the beta program or terminates Tester's participation. <strong>Confidentiality and non-competition obligations survive termination of this Agreement.</strong></p>
+      <p>Developer reserves the right to revoke beta access at any time, for any reason, without notice.</p>
+    </div>
+
+    <div class="policy-section" id="s8">
+      <div class="section-number">Section 08</div>
+      <h2>Governing Law</h2>
+      <p>This Agreement shall be governed by and construed in accordance with the laws of the <strong>State of California</strong>, without regard to its conflict of law provisions. Any disputes arising under this Agreement shall be resolved in the courts of California.</p>
+    </div>
+
+    <div class="policy-section" id="s9">
+      <div class="section-number">Section 09</div>
+      <h2>Entire Agreement</h2>
+      <p>This Agreement constitutes the entire agreement between the parties regarding the beta program and supersedes all prior discussions, representations, or agreements. Developer reserves the right to update these terms with reasonable notice to active testers.</p>
+      <p>Questions? Contact us at <strong>info@callboxhelper.com</strong> before accepting if you have concerns about any terms.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Call Box <span>Helper</span></div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#beta">Beta Signup</a></li>
+        <li><a href="bugreport.html">Report a Bug</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="agreement.html">Beta Agreement</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 Call Box Helper. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

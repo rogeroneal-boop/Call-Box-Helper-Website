@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Report a Bug — Call Box Helper</title>
+  <meta name="description" content="Found a bug in Call Box Helper? Let us know and we'll fix it fast." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #ffffff;
+      --off-white: #f7f6f3;
+      --light-grey: #efefed;
+      --mid-grey: #c8c7c2;
+      --dark-grey: #5a5955;
+      --near-black: #1c1c1a;
+      --accent: #2a6496;
+      --accent-light: #e8f0f7;
+      --accent-dark: #1a3d5c;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --radius: 4px;
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      background: var(--off-white);
+      color: var(--near-black);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--light-grey);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      color: var(--near-black);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+    .nav-logo span { color: var(--accent); }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--dark-grey);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--near-black); }
+
+    .page-header {
+      background: var(--near-black);
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+    }
+    .page-header .label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7ec8f0;
+      margin-bottom: 1rem;
+    }
+    .page-header h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .page-header p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.5);
+      max-width: 480px;
+      margin: 0 auto;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .form-wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 3rem 2rem 6rem;
+    }
+
+    .form-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--light-grey);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group:last-of-type { margin-bottom: 0; }
+
+    label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--dark-grey);
+      letter-spacing: 0.02em;
+    }
+
+    .label-required::after {
+      content: ' *';
+      color: #c0392b;
+    }
+
+    input, select, textarea {
+      background: var(--off-white);
+      border: 1px solid var(--light-grey);
+      border-radius: var(--radius);
+      color: var(--near-black);
+      padding: 0.75rem 1rem;
+      font-size: 0.925rem;
+      font-family: var(--sans);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      width: 100%;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(42,100,150,0.1);
+      background: var(--white);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: var(--mid-grey);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .severity-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 0.25rem;
+    }
+
+    .severity-option {
+      position: relative;
+    }
+
+    .severity-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0; height: 0;
+    }
+
+    .severity-label {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.875rem 0.5rem;
+      background: var(--off-white);
+      border: 2px solid var(--light-grey);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+
+    .severity-label:hover {
+      border-color: var(--mid-grey);
+    }
+
+    .severity-option input[type="radio"]:checked + .severity-label {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .severity-emoji { font-size: 1.5rem; }
+
+    .severity-text {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--dark-grey);
+    }
+
+    .severity-sub {
+      font-size: 0.65rem;
+      color: var(--mid-grey);
+      line-height: 1.3;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--light-grey);
+      margin: 1.75rem 0;
+    }
+
+    .section-heading {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: var(--radius);
+      font-size: 1rem;
+      font-weight: 600;
+      font-family: var(--sans);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 1.75rem;
+    }
+
+    .btn-submit:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-submit:disabled {
+      background: var(--mid-grey);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-note {
+      font-size: 0.75rem;
+      color: var(--mid-grey);
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .success-card {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .success-card .check {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .success-card h2 {
+      font-family: var(--serif);
+      font-size: 2rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      color: var(--near-black);
+    }
+
+    .success-card p {
+      font-size: 0.95rem;
+      color: var(--dark-grey);
+      line-height: 1.7;
+      font-weight: 300;
+      max-width: 400px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .btn-another {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 0.75rem 1.5rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      font-family: var(--sans);
+      transition: background 0.2s;
+    }
+
+    .btn-another:hover { background: #d4e8f5; }
+
+    /* tips sidebar */
+    .tips-box {
+      background: var(--accent-light);
+      border: 1px solid rgba(42,100,150,0.2);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .tips-box h3 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .tips-box ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .tips-box li {
+      font-size: 0.825rem;
+      color: var(--accent-dark);
+      line-height: 1.5;
+      margin-bottom: 0.4rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .tips-box li::before {
+      content: '→';
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    footer {
+      background: var(--near-black);
+      color: rgba(255,255,255,0.4);
+      padding: 3rem 2rem;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
+    }
+    .footer-logo span { color: #7ec8f0; }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+    .footer-copy { font-size: 0.75rem; }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 1rem; }
+      .form-card { padding: 1.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .severity-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Call Box <span>Helper</span></a>
+    <a href="index.html" class="nav-back">← Back to Home</a>
+  </nav>
+
+  <div class="page-header">
+    <div class="label">Beta Feedback</div>
+    <h1>Report a Bug</h1>
+    <p>Found something broken? Tell us exactly what happened and we'll get it fixed fast. Your reports directly shape the app.</p>
+  </div>
+
+  <div class="form-wrapper">
+
+    <div class="tips-box">
+      <h3>Tips for a great bug report</h3>
+      <ul>
+        <li>Describe what you expected to happen vs. what actually happened</li>
+        <li>Include the steps to reproduce it — we need to see it to fix it</li>
+        <li>Your device model and Android version help us narrow it down fast</li>
+        <li>Screenshots or screen recordings are incredibly helpful if you have them</li>
+      </ul>
+    </div>
+
+    <div class="form-card">
+      <div id="bug-form">
+
+        <div class="section-heading">About You</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="label-required" for="name">Your Name</label>
+            <input type="text" id="name" placeholder="Jane Smith" required />
+          </div>
+          <div class="form-group">
+            <label class="label-required" for="email">Email Address</label>
+            <input type="email" id="email" placeholder="jane@example.com" required />
+          </div>
+        </div>
+
+        <hr class="divider">
+        <div class="section-heading">Your Device</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="label-required" for="device">Device Model</label>
+            <input type="text" id="device" placeholder="e.g. Samsung Galaxy S23" required />
+          </div>
+          <div class="form-group">
+            <label class="label-required" for="android">Android Version</label>
+            <input type="text" id="android" placeholder="e.g. Android 12" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="appversion">App Version <span style="font-weight:300; color: var(--mid-grey);">(optional — found in Settings → About)</span></label>
+          <input type="text" id="appversion" placeholder="e.g. 1.0.2" />
+        </div>
+
+        <hr class="divider">
+        <div class="section-heading">The Bug</div>
+
+        <div class="form-group">
+          <label class="label-required">How severe is this?</label>
+          <div class="severity-grid">
+            <div class="severity-option">
+              <input type="radio" name="severity" id="sev-low" value="Low — minor annoyance" />
+              <label class="severity-label" for="sev-low">
+                <span class="severity-emoji">🟡</span>
+                <span class="severity-text">Low</span>
+                <span class="severity-sub">Minor annoyance, workaround exists</span>
+              </label>
+            </div>
+            <div class="severity-option">
+              <input type="radio" name="severity" id="sev-med" value="Medium — feature broken" />
+              <label class="severity-label" for="sev-med">
+                <span class="severity-emoji">🟠</span>
+                <span class="severity-text">Medium</span>
+                <span class="severity-sub">Feature not working correctly</span>
+              </label>
+            </div>
+            <div class="severity-option">
+              <input type="radio" name="severity" id="sev-high" value="High — app crash or gate not opening" />
+              <label class="severity-label" for="sev-high">
+                <span class="severity-emoji">🔴</span>
+                <span class="severity-text">High</span>
+                <span class="severity-sub">App crash or gate won't open</span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-top: 1.25rem;">
+          <label class="label-required" for="summary">Bug Summary</label>
+          <input type="text" id="summary" placeholder="e.g. App crashes when I open the More menu during a call" required />
+        </div>
+
+        <div class="form-group">
+          <label class="label-required" for="steps">Steps to Reproduce</label>
+          <textarea id="steps" placeholder="1. Start a call&#10;2. Open the More menu&#10;3. Tap Hold&#10;4. App crashes" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="label-required" for="expected">What did you expect to happen?</label>
+          <textarea id="expected" placeholder="The call should have been placed on hold and I should see the hold button highlighted." style="min-height: 80px;" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="label-required" for="actual">What actually happened?</label>
+          <textarea id="actual" placeholder="The app crashed and closed completely. The call was disconnected." style="min-height: 80px;" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="frequency">How often does this happen?</label>
+          <select id="frequency">
+            <option value="" disabled selected>Select frequency</option>
+            <option>Every time</option>
+            <option>Most of the time</option>
+            <option>Sometimes</option>
+            <option>Only happened once</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="extra">Anything else we should know? <span style="font-weight:300; color: var(--mid-grey);">(optional)</span></label>
+          <textarea id="extra" placeholder="Any other context, screenshots, or observations..." style="min-height: 80px;"></textarea>
+        </div>
+
+        <button class="btn-submit" onclick="handleSubmit(event)">Submit Bug Report →</button>
+        <p class="form-note">* Required fields. We read every report and respond to critical bugs within 24 hours.</p>
+
+      </div>
+
+      <div class="success-card" id="success-msg">
+        <div class="check">🐛✅</div>
+        <h2>Report received.</h2>
+        <p>Thank you — we read every report. Critical bugs get a response within 24 hours. You're helping make this app better for everyone.</p>
+        <button class="btn-another" onclick="resetForm()">Submit another report</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Call Box <span>Helper</span></div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#beta">Beta Signup</a></li>
+        <li><a href="bugreport.html">Report a Bug</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="agreement.html">Beta Agreement</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 Call Box Helper. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    async function handleSubmit(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const device = document.getElementById('device').value.trim();
+      const android = document.getElementById('android').value.trim();
+      const summary = document.getElementById('summary').value.trim();
+      const steps = document.getElementById('steps').value.trim();
+      const expected = document.getElementById('expected').value.trim();
+      const actual = document.getElementById('actual').value.trim();
+      const severityEl = document.querySelector('input[name="severity"]:checked');
+
+      if (!name || !email || !device || !android || !summary || !steps || !expected || !actual) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+
+      if (!severityEl) {
+        alert('Please select a severity level.');
+        return;
+      }
+
+      const btn = document.querySelector('.btn-submit');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      try {
+        const response = await fetch('https://formspree.io/f/mrejkerw', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name,
+            email,
+            device,
+            androidVersion: android,
+            appVersion: document.getElementById('appversion').value.trim() || 'Not provided',
+            severity: severityEl.value,
+            summary,
+            stepsToReproduce: steps,
+            expectedBehavior: expected,
+            actualBehavior: actual,
+            frequency: document.getElementById('frequency').value || 'Not specified',
+            additionalInfo: document.getElementById('extra').value.trim() || 'None'
+          })
+        });
+
+        if (response.ok) {
+          document.getElementById('bug-form').style.display = 'none';
+          document.getElementById('success-msg').style.display = 'block';
+        } else {
+          throw new Error('Submission failed');
+        }
+      } catch (err) {
+        alert('Something went wrong. Please try again or email info@callboxhelper.com directly.');
+        btn.textContent = 'Submit Bug Report →';
+        btn.disabled = false;
+      }
+    }
+
+    function resetForm() {
+      document.getElementById('bug-form').reset();
+      document.getElementById('bug-form').style.display = 'block';
+      document.getElementById('success-msg').style.display = 'none';
+      document.querySelector('.btn-submit').textContent = 'Submit Bug Report →';
+      document.querySelector('.btn-submit').disabled = false;
+    }
+  </script>
+
+</body>
+</html>

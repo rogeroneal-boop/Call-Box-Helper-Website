@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Call Box Helper</title>
+  <meta name="description" content="Privacy Policy for Call Box Helper — what data we collect, how we use it, and what we don't do." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #ffffff;
+      --off-white: #f7f6f3;
+      --light-grey: #efefed;
+      --mid-grey: #c8c7c2;
+      --dark-grey: #5a5955;
+      --near-black: #1c1c1a;
+      --accent: #2a6496;
+      --accent-light: #e8f0f7;
+      --accent-dark: #1a3d5c;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --radius: 4px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.07);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--near-black);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--light-grey);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      color: var(--near-black);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-back {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--dark-grey);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--near-black); }
+
+    /* ── HEADER ── */
+    .page-header {
+      background: var(--near-black);
+      padding: 8rem 2rem 4rem;
+      text-align: center;
+    }
+
+    .page-header .label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7ec8f0;
+      margin-bottom: 1rem;
+    }
+
+    .page-header h1 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .page-header .meta {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ── PLAIN LANGUAGE SUMMARY ── */
+    .summary-strip {
+      background: var(--accent-light);
+      border-bottom: 1px solid rgba(42,100,150,0.15);
+      padding: 2rem;
+    }
+
+    .summary-strip-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .summary-strip h2 {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      color: var(--accent-dark);
+      margin-bottom: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .summary-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+
+    .summary-icon {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .summary-item p {
+      font-size: 0.875rem;
+      color: var(--accent-dark);
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    .summary-item strong { font-weight: 600; }
+
+    /* ── CONTENT ── */
+    .content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 2rem 6rem;
+    }
+
+    .toc {
+      background: var(--off-white);
+      border: 1px solid var(--light-grey);
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .toc h3 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.875rem;
+    }
+
+    .toc ol {
+      list-style: decimal;
+      padding-left: 1.25rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.3rem 2rem;
+    }
+
+    .toc li a {
+      font-size: 0.875rem;
+      color: var(--dark-grey);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .toc li a:hover { color: var(--accent); }
+
+    .policy-section {
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--light-grey);
+    }
+
+    .policy-section:last-child {
+      border-bottom: none;
+    }
+
+    .section-number {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .policy-section h2 {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+      color: var(--near-black);
+    }
+
+    .policy-section p {
+      font-size: 0.9rem;
+      color: var(--dark-grey);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+      font-weight: 300;
+    }
+
+    .policy-section p:last-child { margin-bottom: 0; }
+
+    .policy-section ul, .policy-section ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .policy-section li {
+      font-size: 0.9rem;
+      color: var(--dark-grey);
+      line-height: 1.75;
+      margin-bottom: 0.35rem;
+      font-weight: 300;
+    }
+
+    .policy-section strong {
+      color: var(--near-black);
+      font-weight: 600;
+    }
+
+    /* highlight box */
+    .highlight-box {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+    }
+
+    .highlight-box p {
+      color: var(--accent-dark) !important;
+      font-weight: 400 !important;
+      margin-bottom: 0 !important;
+    }
+
+    .highlight-box strong { color: var(--accent-dark) !important; }
+
+    /* not-collected box */
+    .not-collected {
+      background: #f0faf4;
+      border-left: 3px solid #2d7a4f;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1rem 1.25rem;
+      margin: 1.25rem 0;
+    }
+
+    .not-collected p {
+      color: #1a4d30 !important;
+      font-weight: 400 !important;
+      margin-bottom: 0 !important;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--near-black);
+      color: rgba(255,255,255,0.4);
+      padding: 3rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .footer-logo span { color: #7ec8f0; }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+
+    .footer-copy { font-size: 0.75rem; }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 1rem; }
+      .toc ol { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Call Box <span>Helper</span></a>
+    <a href="index.html" class="nav-back">← Back to Home</a>
+  </nav>
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div class="label">Legal</div>
+    <h1>Privacy Policy</h1>
+    <p class="meta">Last updated: May 2026 &nbsp;·&nbsp; Effective immediately upon use</p>
+  </div>
+
+  <!-- PLAIN LANGUAGE SUMMARY -->
+  <div class="summary-strip">
+    <div class="summary-strip-inner">
+      <h2>The short version — plain English first.</h2>
+      <div class="summary-grid">
+        <div class="summary-item">
+          <div class="summary-icon">✅</div>
+          <p><strong>We don't sell your data.</strong> Ever. To anyone.</p>
+        </div>
+        <div class="summary-item">
+          <div class="summary-icon">📱</div>
+          <p><strong>Your contacts and call history stay on your phone.</strong> We never see them.</p>
+        </div>
+        <div class="summary-item">
+          <div class="summary-icon">🔒</div>
+          <p><strong>The app stores data locally.</strong> Saved numbers and call logs live on your device only.</p>
+        </div>
+        <div class="summary-item">
+          <div class="summary-icon">📋</div>
+          <p><strong>Beta signups are kept private.</strong> Your info is only used to manage access.</p>
+        </div>
+        <div class="summary-item">
+          <div class="summary-icon">🐛</div>
+          <p><strong>Crash reports are anonymous.</strong> Firebase Crashlytics helps us fix bugs, not track you.</p>
+        </div>
+        <div class="summary-item">
+          <div class="summary-icon">📧</div>
+          <p><strong>No marketing emails.</strong> We only contact you about your beta access.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- TOC -->
+    <div class="toc">
+      <h3>Contents</h3>
+      <ol>
+        <li><a href="#s1">Who We Are</a></li>
+        <li><a href="#s2">What Data We Collect</a></li>
+        <li><a href="#s3">What We Do NOT Collect</a></li>
+        <li><a href="#s4">App Permissions Explained</a></li>
+        <li><a href="#s5">How We Use Your Data</a></li>
+        <li><a href="#s6">Third Party Services</a></li>
+        <li><a href="#s7">Data Retention</a></li>
+        <li><a href="#s8">Your Rights</a></li>
+        <li><a href="#s9">California Residents (CCPA)</a></li>
+        <li><a href="#s10">Children's Privacy</a></li>
+        <li><a href="#s11">Changes to This Policy</a></li>
+        <li><a href="#s12">Contact Us</a></li>
+      </ol>
+    </div>
+
+    <!-- S1 -->
+    <div class="policy-section" id="s1">
+      <div class="section-number">Section 01</div>
+      <h2>Who We Are</h2>
+      <p>Call Box Helper is an Android application developed and operated as an independent project. References to "we," "us," or "our" in this policy refer to Call Box Helper. References to "you" or "your" refer to users of the app and visitors to this website.</p>
+      <p>You can contact us at <strong>info@callboxhelper.com</strong> with any privacy-related questions.</p>
+    </div>
+
+    <!-- S2 -->
+    <div class="policy-section" id="s2">
+      <div class="section-number">Section 02</div>
+      <h2>What Data We Collect</h2>
+      <p>We collect the minimum data necessary to operate the app and manage the beta program.</p>
+
+      <p><strong>Through the beta signup form (website):</strong></p>
+      <ul>
+        <li>First and last name</li>
+        <li>Email address</li>
+        <li>Device model and Android version</li>
+        <li>Use case description (optional)</li>
+        <li>Agreement to the Beta Tester NDA (timestamp)</li>
+      </ul>
+
+      <p><strong>Through the app — stored locally on your device only:</strong></p>
+      <ul>
+        <li>Call box phone numbers you save in the app</li>
+        <li>Labels you assign to those numbers</li>
+        <li>Your configured unlock code (DTMF tone)</li>
+        <li>App settings (timing preferences, vibrate toggle, etc.)</li>
+        <li>A local call log of auto-answered and missed calls</li>
+      </ul>
+
+      <p><strong>Through Firebase Crashlytics (automatic, anonymous):</strong></p>
+      <ul>
+        <li>Crash reports including device model, Android version, and app version</li>
+        <li>Error logs that help us identify and fix bugs</li>
+      </ul>
+
+      <div class="highlight-box">
+        <p><strong>Important:</strong> None of the locally stored app data — your saved numbers, unlock code, call log, or settings — is ever transmitted to us or any third party. It lives on your device and stays there.</p>
+      </div>
+    </div>
+
+    <!-- S3 -->
+    <div class="policy-section" id="s3">
+      <div class="section-number">Section 03</div>
+      <h2>What We Do NOT Collect</h2>
+      <p>We want to be completely transparent about what we do not access, collect, or transmit:</p>
+
+      <div class="not-collected">
+        <p>✅ <strong>We do not collect your contacts.</strong> The app requests contacts permission solely to display the name of an incoming caller on your screen — the same way your default phone app does. Your contact list is never read, stored, or transmitted by us.</p>
+      </div>
+
+      <div class="not-collected">
+        <p>✅ <strong>We do not collect your call history.</strong> The app reads your device's native call log to display your recent calls inside the dialer. This data never leaves your device. We do not have access to your call history.</p>
+      </div>
+
+      <div class="not-collected">
+        <p>✅ <strong>We do not record calls.</strong> Call Box Helper does not record audio from any call. The microphone permission is not requested.</p>
+      </div>
+
+      <div class="not-collected">
+        <p>✅ <strong>We do not collect your location.</strong> The app does not request or use location data in any form.</p>
+      </div>
+
+      <div class="not-collected">
+        <p>✅ <strong>We do not sell your data.</strong> We do not sell, rent, trade, or otherwise share your personal information with third parties for commercial purposes.</p>
+      </div>
+
+      <div class="not-collected">
+        <p>✅ <strong>We do not serve ads.</strong> There is no advertising in Call Box Helper and no ad tracking of any kind.</p>
+      </div>
+    </div>
+
+    <!-- S4 -->
+    <div class="policy-section" id="s4">
+      <div class="section-number">Section 04</div>
+      <h2>App Permissions Explained</h2>
+      <p>Call Box Helper requests the following Android permissions. Here is exactly why each one is needed:</p>
+      <ul>
+        <li><strong>Phone / Call Management</strong> — Required to function as the default phone app and to automatically answer calls from your saved call box numbers. Without this, the core feature cannot work.</li>
+        <li><strong>Read Contacts</strong> — Used only to display a caller's name on the incoming call screen and in the dialer. We do not store or transmit your contacts.</li>
+        <li><strong>Read Call Log</strong> — Used only to display your recent calls in the built-in dialer. We do not store or transmit your call history.</li>
+        <li><strong>Notifications</strong> — Used to send you a notification when a gate is opened automatically or when you miss a call. Not used for marketing.</li>
+        <li><strong>Vibrate</strong> — Used to optionally vibrate the device when a call box call is auto-answered, so you know it happened.</li>
+        <li><strong>Bluetooth</strong> — Used to route call audio to a connected Bluetooth headset during calls. Not used to scan for or track nearby devices.</li>
+      </ul>
+    </div>
+
+    <!-- S5 -->
+    <div class="policy-section" id="s5">
+      <div class="section-number">Section 05</div>
+      <h2>How We Use Your Data</h2>
+      <p>The data we collect is used only for the following purposes:</p>
+      <ul>
+        <li><strong>Beta signup information</strong> — to review your application, send you Google Play access instructions, and communicate with you about the beta program. Nothing else.</li>
+        <li><strong>Crash reports</strong> — to identify, diagnose, and fix bugs in the app. Reports are anonymous and contain no personally identifiable information.</li>
+      </ul>
+      <p>We do not use your data for advertising, profiling, marketing, or any purpose beyond what is listed above.</p>
+    </div>
+
+    <!-- S6 -->
+    <div class="policy-section" id="s6">
+      <div class="section-number">Section 06</div>
+      <h2>Third Party Services</h2>
+      <p>Call Box Helper uses the following third party services. Each has its own privacy policy.</p>
+      <ul>
+        <li><strong>Firebase Crashlytics (Google)</strong> — Used for anonymous crash reporting to help us fix bugs. Data is processed by Google. <a href="https://firebase.google.com/support/privacy" target="_blank" style="color: var(--accent);">Firebase Privacy Policy →</a></li>
+        <li><strong>Formspree</strong> — Used to process beta signup form submissions on this website. Your signup data is transmitted through Formspree to our email. <a href="https://formspree.io/legal/privacy-policy" target="_blank" style="color: var(--accent);">Formspree Privacy Policy →</a></li>
+        <li><strong>Google Play</strong> — The app is distributed through Google Play. Google's privacy policies apply to the distribution and download process. <a href="https://policies.google.com/privacy" target="_blank" style="color: var(--accent);">Google Privacy Policy →</a></li>
+      </ul>
+      <p>We do not integrate any advertising networks, analytics platforms beyond Crashlytics, or social media trackers.</p>
+    </div>
+
+    <!-- S7 -->
+    <div class="policy-section" id="s7">
+      <div class="section-number">Section 07</div>
+      <h2>Data Retention</h2>
+      <p><strong>Beta signup data</strong> is retained for the duration of the beta program. When the beta concludes, signup records will be deleted unless you have been converted to a registered user of the public release.</p>
+      <p><strong>App data</strong> (saved numbers, call log, settings) is stored locally on your device. It is deleted when you uninstall the app. We have no copy of it.</p>
+      <p><strong>Crash reports</strong> are retained by Firebase Crashlytics per Google's standard data retention policies.</p>
+      <p>You may request deletion of your beta signup data at any time by emailing <strong>info@callboxhelper.com</strong>.</p>
+    </div>
+
+    <!-- S8 -->
+    <div class="policy-section" id="s8">
+      <div class="section-number">Section 08</div>
+      <h2>Your Rights</h2>
+      <p>Regardless of where you are located, you have the right to:</p>
+      <ul>
+        <li>Request a copy of the personal data we hold about you</li>
+        <li>Request correction of inaccurate data</li>
+        <li>Request deletion of your data</li>
+        <li>Withdraw consent at any time (which will result in removal from the beta program)</li>
+      </ul>
+      <p>To exercise any of these rights, contact us at <strong>info@callboxhelper.com</strong>. We will respond within 30 days.</p>
+    </div>
+
+    <!-- S9 -->
+    <div class="policy-section" id="s9">
+      <div class="section-number">Section 09</div>
+      <h2>California Residents (CCPA)</h2>
+      <p>If you are a California resident, the California Consumer Privacy Act (CCPA) gives you specific rights regarding your personal information:</p>
+      <ul>
+        <li><strong>Right to Know</strong> — You may request disclosure of the personal information we have collected about you and how it has been used.</li>
+        <li><strong>Right to Delete</strong> — You may request deletion of personal information we have collected from you.</li>
+        <li><strong>Right to Opt-Out</strong> — You have the right to opt out of the sale of your personal information. We do not sell personal information, so this right is already satisfied.</li>
+        <li><strong>Right to Non-Discrimination</strong> — We will not discriminate against you for exercising any of your CCPA rights.</li>
+      </ul>
+      <p>To submit a CCPA request, contact us at <strong>info@callboxhelper.com</strong>.</p>
+    </div>
+
+    <!-- S10 -->
+    <div class="policy-section" id="s10">
+      <div class="section-number">Section 10</div>
+      <h2>Children's Privacy</h2>
+      <p>Call Box Helper is not directed at children under the age of 13. We do not knowingly collect personal information from children under 13. If you believe a child under 13 has submitted personal information through our beta signup form, please contact us at <strong>info@callboxhelper.com</strong> and we will delete it promptly.</p>
+    </div>
+
+    <!-- S11 -->
+    <div class="policy-section" id="s11">
+      <div class="section-number">Section 11</div>
+      <h2>Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. When we do, we will update the "Last updated" date at the top of this page. For significant changes, we will notify active beta testers by email.</p>
+      <p>Your continued use of Call Box Helper after any changes constitutes your acceptance of the updated policy.</p>
+    </div>
+
+    <!-- S12 -->
+    <div class="policy-section" id="s12">
+      <div class="section-number">Section 12</div>
+      <h2>Contact Us</h2>
+      <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
+      <p><strong>Email:</strong> info@callboxhelper.com<br>
+      <strong>App:</strong> Call Box Helper<br>
+      <strong>Website:</strong> callboxhelper.com</p>
+      <p>We take privacy seriously and will respond to all inquiries within 30 days.</p>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Call Box <span>Helper</span></div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#beta">Beta Signup</a></li>
+        <li><a href="bugreport.html">Report a Bug</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="agreement.html">Beta Agreement</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 Call Box Helper. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
