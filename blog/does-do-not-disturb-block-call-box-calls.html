@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Does Do Not Disturb Block Call Box Calls? — Call Box Helper</title>
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <meta name="description" content="Yes — Do Not Disturb silences call box calls just like any other call. Here's why it happens, what you can do about it, and how to make your gate open automatically even on DnD." />
+  <link rel="canonical" href="https://callboxhelper.com/blog/does-do-not-disturb-block-call-box-calls.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #ffffff;
+      --off-white: #f7f6f3;
+      --light-grey: #efefed;
+      --mid-grey: #c8c7c2;
+      --dark-grey: #5a5955;
+      --near-black: #1c1c1a;
+      --accent: #2a6496;
+      --accent-light: #e8f0f7;
+      --accent-dark: #1a3d5c;
+      --success: #2d7a4f;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+      --radius: 4px;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
+      --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.05);
+      --shadow-lg: 0 12px 40px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.06);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--near-black);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--light-grey);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      color: var(--near-black);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--dark-grey);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--near-black); }
+
+    .nav-cta {
+      background: var(--accent) !important;
+      color: var(--white) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius);
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--accent-dark) !important; color: var(--white) !important; }
+
+    .article-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 7rem 2rem 6rem;
+    }
+
+    .breadcrumb {
+      font-size: 0.8rem;
+      color: var(--mid-grey);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .article-tag {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+    }
+
+    .article-date { font-size: 0.8rem; color: var(--mid-grey); }
+    .article-read-time { font-size: 0.8rem; color: var(--mid-grey); }
+
+    h1.article-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.25rem;
+    }
+
+    .article-intro {
+      font-size: 1.15rem;
+      color: var(--dark-grey);
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--light-grey);
+    }
+
+    .article-body h2 {
+      font-family: var(--serif);
+      font-size: 1.75rem;
+      letter-spacing: -0.02em;
+      margin: 2.5rem 0 1rem;
+      color: var(--near-black);
+    }
+
+    .article-body h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 2rem 0 0.75rem;
+      color: var(--near-black);
+    }
+
+    .article-body p {
+      font-size: 1rem;
+      color: var(--dark-grey);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+      font-weight: 300;
+    }
+
+    .article-body strong { color: var(--near-black); font-weight: 500; }
+
+    .article-body ul, .article-body ol {
+      margin: 1rem 0 1.5rem 1.5rem;
+    }
+
+    .article-body li {
+      font-size: 1rem;
+      color: var(--dark-grey);
+      line-height: 1.75;
+      margin-bottom: 0.5rem;
+      font-weight: 300;
+    }
+
+    .article-body a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-decoration-color: rgba(42,100,150,0.3);
+    }
+
+    .article-body a:hover { text-decoration-color: var(--accent); }
+
+    .callout {
+      background: var(--accent-light);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      padding: 1.25rem 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .callout p { margin: 0; color: var(--accent-dark); font-size: 0.95rem; }
+    .callout strong { color: var(--accent-dark); }
+
+    .callout.warning {
+      background: #fef9e7;
+      border-left-color: #f39c12;
+    }
+
+    .callout.warning p { color: #7d6608; }
+    .callout.warning strong { color: #7d6608; }
+
+    .callout.success {
+      background: #eafaf1;
+      border-left-color: var(--success);
+    }
+
+    .callout.success p { color: #1e8449; }
+    .callout.success strong { color: #1e8449; }
+
+    .fact-box {
+      background: var(--off-white);
+      border: 1px solid var(--light-grey);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+    }
+
+    .fact-box h4 {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .fact-box ul { margin: 0 0 0 1.25rem; }
+    .fact-box li {
+      font-size: 0.9rem;
+      color: var(--dark-grey);
+      margin-bottom: 0.4rem;
+      font-weight: 300;
+    }
+
+    .article-cta {
+      background: var(--near-black);
+      border-radius: 8px;
+      padding: 2.5rem;
+      margin: 3rem 0;
+      text-align: center;
+    }
+
+    .article-cta h3 {
+      font-family: var(--serif);
+      font-size: 1.75rem;
+      color: white;
+      margin-bottom: 0.75rem;
+    }
+
+    .article-cta p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .article-cta a { color: #ffffff !important; }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #ffffff !important;
+      padding: 0.875rem 2rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+    .related {
+      margin-top: 4rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--light-grey);
+    }
+
+    .related h3 { font-family: var(--serif); font-size: 1.5rem; margin-bottom: 1.5rem; }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .related-card {
+      border: 1px solid var(--light-grey);
+      border-radius: 8px;
+      padding: 1.25rem;
+      text-decoration: none;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+      display: block;
+    }
+
+    .related-card:hover { border-color: var(--accent); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .related-card .tag { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
+    .related-card h4 { font-size: 0.95rem; font-weight: 500; color: var(--near-black); line-height: 1.4; }
+
+    footer {
+      background: var(--near-black);
+      color: rgba(255,255,255,0.4);
+      padding: 3rem 2rem;
+    }
+
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo { font-family: var(--serif); font-size: 1.1rem; color: rgba(255,255,255,0.7); }
+    .footer-logo span { color: #7ec8f0; }
+    .footer-links { display: flex; gap: 1.5rem; list-style: none; }
+    .footer-links a { color: rgba(255,255,255,0.4); font-size: 0.8rem; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.7); }
+    .footer-copy { font-size: 0.75rem; }
+
+    @media (max-width: 600px) {
+      nav { padding: 0 1rem; }
+      .nav-links { display: none; }
+      .article-wrap { padding: 6rem 1.25rem 4rem; }
+      .article-cta { padding: 1.75rem; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Does Do Not Disturb Block Call Box Calls?",
+    "description": "Yes — Do Not Disturb silences call box calls just like any other call. Here's why it happens, what you can do about it, and how to make your gate open automatically even on DnD.",
+    "url": "https://callboxhelper.com/blog/does-do-not-disturb-block-call-box-calls.html",
+    "datePublished": "2026-07-16",
+    "author": {
+      "@type": "Organization",
+      "name": "Call Box Helper",
+      "url": "https://callboxhelper.com"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Call Box Helper",
+      "url": "https://callboxhelper.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://callboxhelper.com/favicon-192.png"
+      }
+    }
+  }
+  </script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5QP317Q6MV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5QP317Q6MV');
+  </script>
+</head>
+<body>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">Call Box <span>Helper</span></a>
+    <ul class="nav-links">
+      <li><a href="../index.html#how-it-works">How It Works</a></li>
+      <li><a href="../index.html#who">Who It's For</a></li>
+      <li><a href="../index.html#faq">FAQ</a></li>
+      <li><a href="index.html">Blog</a></li>
+      <li><a href="../index.html#beta" class="nav-cta">Join Beta</a></li>
+    </ul>
+  </nav>
+
+  <div class="article-wrap">
+
+    <div class="breadcrumb">
+      <a href="../index.html">Home</a> › <a href="index.html">Blog</a> › Does Do Not Disturb Block Call Box Calls?
+    </div>
+
+    <div class="article-meta">
+      <span class="article-tag">FAQ</span>
+      <span class="article-date">July 2026</span>
+      <span class="article-read-time">4 min read</span>
+    </div>
+
+    <h1 class="article-title">Does Do Not Disturb Block Call Box Calls?</h1>
+
+    <p class="article-intro">
+      Yes — Do Not Disturb silences call box calls just like any other incoming call. 
+      If you've ever missed a delivery because your phone was on DnD, this is exactly 
+      why. Here's what's happening and what you can do about it.
+    </p>
+
+    <div class="article-body">
+
+      <h2>Why DnD blocks your call box</h2>
+      <p>
+        Your <a href="what-is-a-call-box.html">call box</a> opens your gate by calling 
+        your phone — just like any other caller. When Do Not Disturb is on, your phone 
+        silences all incoming calls unless you've specifically added them to your 
+        exceptions list.
+      </p>
+      <p>
+        The call box doesn't know it's being silenced. It dials your number, your phone 
+        receives the call silently, times out after 20-30 seconds, and the gate stays 
+        closed. The delivery driver moves on. You get a missed call notification 
+        sometime later and wonder what happened.
+      </p>
+
+      <div class="callout warning">
+        <p><strong>The problem:</strong> Do Not Disturb treats your call box exactly like any other caller. There's no way for the system to know that this particular call is from your gate and should be allowed through.</p>
+      </div>
+
+      <h2>The partial fix — adding your call box as a DnD exception</h2>
+      <p>
+        Android's Do Not Disturb settings let you create exceptions for specific contacts 
+        or numbers. If you add your call box number to your contacts and mark it as a 
+        favorite or exception, DnD will let it ring through.
+      </p>
+      <p>Here's how to do it on Android:</p>
+      <ol>
+        <li>Save your call box number in your contacts — name it something like "Front Gate"</li>
+        <li>Go to <strong>Settings → Sound → Do Not Disturb</strong></li>
+        <li>Tap <strong>Exceptions</strong> or <strong>Allow exceptions</strong></li>
+        <li>Enable <strong>Calls from contacts</strong> or add the specific number</li>
+        <li>Make sure "Front Gate" is in the allowed list</li>
+      </ol>
+      <p>
+        This works — but it's only a partial fix. Your phone will now ring when the 
+        call box calls, but you still have to answer it manually and press 9 to open 
+        the gate. If you're asleep, in a meeting, or away from your phone, you'll 
+        still miss it.
+      </p>
+
+      <div class="callout">
+        <p><strong>The limitation:</strong> Adding your call box as a DnD exception means your phone rings — but you still have to answer and press 9. It doesn't solve the problem of missing the call when you're unavailable.</p>
+      </div>
+
+      <h2>The complete fix — automating it entirely</h2>
+      <p>
+        The only way to truly solve the DnD problem is to remove the manual step 
+        altogether. Instead of hoping you'll be available to answer when the call box 
+        calls, you automate the response so the gate opens every time — regardless of 
+        whether your phone is on DnD, silent, or your screen is off.
+      </p>
+      <p>
+        <a href="../index.html">Call Box Helper</a> does this by operating as your 
+        default phone app. Because it works at the system level — not as a regular app 
+        running in the background — it receives and handles calls before Do Not Disturb 
+        can silence them. When your registered call box number calls, the app answers 
+        automatically, sends the unlock tone, and hangs up. The gate opens.
+      </p>
+
+      <div class="callout success">
+        <p><strong>How Call Box Helper handles DnD:</strong> Because it operates as your default dialer at the system level, it intercepts call box calls before Do Not Disturb can silence them. Your gate opens automatically — even when DnD is on.</p>
+      </div>
+
+      <h2>Does it work on silent mode too?</h2>
+      <p>
+        Yes. Silent mode and Do Not Disturb are handled the same way — Call Box Helper 
+        operates below both of them at the system level. Whether your phone is on 
+        silent, vibrate, or full DnD, registered call box calls are automatically 
+        answered without making a sound.
+      </p>
+
+      <h2>What about while my screen is off?</h2>
+      <p>
+        Also yes. Call Box Helper doesn't require your screen to be on or the app to 
+        be open. It runs as your default phone app, which means it's always active 
+        regardless of screen state. Your gate opens whether your phone is in your 
+        pocket, face down on a desk, or charging on your nightstand.
+      </p>
+
+      <h2>Will my regular calls still go through DnD?</h2>
+      <p>
+        Yes — your normal DnD behavior is completely unchanged for all other calls. 
+        Only numbers you register as call box numbers get the auto-answer treatment. 
+        Everything else is handled by your regular phone settings exactly as before.
+      </p>
+
+      <div class="fact-box">
+        <h4>Quick summary</h4>
+        <ul>
+          <li>Do Not Disturb blocks call box calls — your gate doesn't open if DnD is on</li>
+          <li>You can add your call box number as a DnD exception so it rings through</li>
+          <li>But you still have to answer manually — the gate doesn't open itself</li>
+          <li>Call Box Helper operates at the system level, below DnD and silent mode</li>
+          <li>With Call Box Helper, your gate opens automatically even when DnD is on</li>
+          <li>All other calls still follow your normal DnD rules</li>
+        </ul>
+      </div>
+
+      <div class="article-cta">
+        <h3>Never miss a call box call again.</h3>
+        <p>Call Box Helper automatically answers your call box and opens your gate — works on silent, Do Not Disturb, and while your screen is off.</p>
+        <a href="../index.html#beta" class="btn-primary">Join the Beta — It's Free →</a>
+      </div>
+
+      <div class="related">
+        <h3>More from the blog</h3>
+        <div class="related-grid">
+          <a href="what-is-a-call-box.html" class="related-card">
+            <div class="tag">Explainer</div>
+            <h4>What Is a Call Box? How Apartment Entry Systems Work</h4>
+          </a>
+          <a href="why-you-keep-missing-deliveries.html" class="related-card">
+            <div class="tag">Tips</div>
+            <h4>Why You Keep Missing Deliveries at Your Apartment</h4>
+          </a>
+          <a href="how-to-automatically-open-your-gate.html" class="related-card">
+            <div class="tag">How-to</div>
+            <h4>How to Automatically Open Your Gate Without Touching Your Phone</h4>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">Call Box <span>Helper</span></div>
+      <ul class="footer-links">
+        <li><a href="../index.html#how-it-works">How It Works</a></li>
+        <li><a href="index.html">Blog</a></li>
+        <li><a href="../index.html#beta">Beta Signup</a></li>
+        <li><a href="../bugreport.html">Report a Bug</a></li>
+        <li><a href="../privacy.html">Privacy Policy</a></li>
+      </ul>
+      <p class="footer-copy">© 2026 Call Box Helper. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
