@@ -55,5 +55,10 @@
   <priority>0.8</priority>
   <changefreq>monthly</changefreq>
 </url>
+  <url>
+  <loc>https://callboxhelper.com/blog/does-do-not-disturb-block-call-box-calls.html</loc>
+  <priority>0.8</priority>
+  <changefreq>monthly</changefreq>
+</url>
   
 </urlset>
