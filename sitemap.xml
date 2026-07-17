@@ -75,5 +75,10 @@
   <priority>0.8</priority>
   <changefreq>monthly</changefreq>
 </url>
+  <url>
+  <loc>https://callboxhelper.com/blog/why-apartment-gates-keep-blocking-deliveries.html</loc>
+  <priority>0.8</priority>
+  <changefreq>monthly</changefreq>
+</url>
   
 </urlset>
