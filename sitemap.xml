@@ -65,5 +65,10 @@
   <priority>0.9</priority>
   <changefreq>monthly</changefreq>
 </url>
+  <url>
+  <loc>https://callboxhelper.com/blog/how-to-make-sure-ups-fedex-amazon-can-reach-you.html</loc>
+  <priority>0.9</priority>
+  <changefreq>monthly</changefreq>
+</url>
   
 </urlset>
